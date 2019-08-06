@@ -1,0 +1,19 @@
+.tabs {
+  display: flex;
+  justify-content: center;
+  .item {
+    padding: 15px 30px;
+    margin: 0 50px;
+    flex-shrink: 0;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    &.selected {
+      border-bottom: 3px solid rgb(66, 156, 230);
+    }
+  }
+}
