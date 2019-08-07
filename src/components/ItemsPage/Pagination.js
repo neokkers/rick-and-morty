@@ -2,12 +2,11 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './pagination.scss';
 
-const changePage = (e, pageNumber, pageCount, history, itemType) => {
+const changePageByDirection = (e, pageNumber, direction, history, itemType) => {
   let page = pageNumber;
   if (e.target.getAttribute('data-disabled') === 'true') return;
-  return pageCount
-    ? history.push(`/items/${itemType}/page-${++page}`)
-    : history.push(`/items/${itemType}/page-${--page}`);
+  if (direction === 'prev') history.push(`/items/${itemType}/page-${--page}`);
+  if (direction === 'next') history.push(`/items/${itemType}/page-${++page}`);
 };
 
 const Pagination = ({ pageCount, itemType, pageNumber, history }) => {
@@ -30,14 +29,18 @@ const Pagination = ({ pageCount, itemType, pageNumber, history }) => {
         className="fa fa-angle-left"
         data-disabled={+pageNumber === 1}
         aria-hidden="true"
-        onClick={e => changePage(e, pageNumber, null, history, itemType)}
+        onClick={e =>
+          changePageByDirection(e, pageNumber, 'prev', history, itemType)
+        }
       ></i>
       {pages}
       <i
         className="fa fa-angle-right"
         data-disabled={+pageNumber === +pageCount}
         aria-hidden="true"
-        onClick={e => changePage(e, pageNumber, pageCount, history, itemType)}
+        onClick={e =>
+          changePageByDirection(e, pageNumber, 'next', history, itemType)
+        }
       ></i>
     </div>
   );
