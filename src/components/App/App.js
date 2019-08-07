@@ -9,12 +9,24 @@ import './App.css';
 class App extends Component {
   state = {
     currentTab: null,
+    data: {
+      characters: {},
+      locations: {},
+      episodes: {},
+    },
   };
 
   setCurrentTab = currentTab => this.setState({ currentTab });
 
+  setData = (itemType, dataFromApi) => {
+    const { data } = this.state;
+    const newData = { ...data };
+    newData[itemType] = dataFromApi;
+    this.setState({ data: newData });
+  };
+
   render() {
-    const { currentTab } = this.state;
+    const { currentTab, data } = this.state;
     return (
       <div className="App">
         <AppHeader title="RickAndMorty" />
@@ -24,7 +36,12 @@ class App extends Component {
             path="/items/:itemType/page-:pageNumber"
             exact
             render={props => (
-              <ItemsPage {...props} setCurrentTab={this.setCurrentTab} />
+              <ItemsPage
+                {...props}
+                setCurrentTab={this.setCurrentTab}
+                setData={this.setData}
+                data={data[props.match.params.itemType]}
+              />
             )}
           />
           <Route

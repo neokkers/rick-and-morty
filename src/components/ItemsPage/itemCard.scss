@@ -1,0 +1,19 @@
+.item-card {
+  &.alive { background-color: rgb(225, 255, 224); }
+  &.dead { background-color: rgb(255, 207, 205); }
+  padding: 10px;
+  text-align: center;
+  // cursor: pointer;
+  border: 1px solid rgb(31, 31, 31);
+  .img {
+    height: 200px;
+    background-size: cover;
+  }
+  > div {
+    margin-bottom: 10px;
+    &.name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}

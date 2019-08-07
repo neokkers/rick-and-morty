@@ -1,0 +1,19 @@
+.pagination {
+  .item {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: black;
+    margin: 0 3px;
+    flex-shrink: 0;
+    border: 1px solid black;
+    &.selected {
+      background-color: #000;
+      color: white;
+    }
+  }
+}

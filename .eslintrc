@@ -4,6 +4,6 @@
   ],
   "rules": {
     "react/prop-types": 0,
-    
+    "no-plusplus": 0
   }
 }
