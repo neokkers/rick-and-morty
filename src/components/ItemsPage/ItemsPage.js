@@ -6,7 +6,7 @@ import ItemSet from './ItemSet';
 export default class ItemsPage extends Component {
   async componentDidMount() {
     this.updateCurrentTab();
-    this.getData();
+    this.getAndSetData('mount'); // method without updating data (for safety when route changes)
   }
 
   componentDidUpdate(prevProps) {
@@ -15,8 +15,11 @@ export default class ItemsPage extends Component {
     if (prevProps.match.params.itemType !== itemType) {
       this.updateCurrentTab();
     }
-    if (prevProps.match.params.pageNumber !== pageNumber) {
-      this.getData();
+    if (
+      prevProps.match.params.pageNumber !== pageNumber ||
+      prevProps.match.params.itemType !== itemType
+    ) {
+      this.getAndSetData();
     }
   }
 
@@ -26,11 +29,12 @@ export default class ItemsPage extends Component {
     setCurrentTab(itemType);
   };
 
-  getData = async () => {
+  getAndSetData = async type => {
     // eslint-disable-next-line prettier/prettier
-    const { match: { params: { itemType, pageNumber } }, setData } = this.props;
+    const { match: { params: { itemType, pageNumber } }, setData, data } = this.props;
+    if (type === 'mount' && data.results) return;
     const res = await getItemsByPage(itemType.slice(0, -1), pageNumber);
-    setData(itemType, res.data);
+    setData(itemType, res.data, pageNumber);
   };
 
   render() {

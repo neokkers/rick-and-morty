@@ -14,23 +14,30 @@ class App extends Component {
       locations: {},
       episodes: {},
     },
+    currentPage: {
+      characters: 1,
+      locations: 1,
+      episodes: 1,
+    },
   };
 
   setCurrentTab = currentTab => this.setState({ currentTab });
 
-  setData = (itemType, dataFromApi) => {
-    const { data } = this.state;
+  setData = (itemType, dataFromApi, pageNumber) => {
+    const { data, currentPage } = this.state;
     const newData = { ...data };
+    const newCurrentPage = { ...currentPage };
     newData[itemType] = dataFromApi;
-    this.setState({ data: newData });
+    newCurrentPage[itemType] = pageNumber;
+    this.setState({ data: newData, currentPage: newCurrentPage });
   };
 
   render() {
-    const { currentTab, data } = this.state;
+    const { currentTab, data, currentPage } = this.state;
     return (
       <div className="App">
         <AppHeader title="RickAndMorty" />
-        <Tabs currentTab={currentTab} />
+        <Tabs currentTab={currentTab} currentPage={currentPage} />
         <Switch>
           <Route
             path="/items/:itemType/page-:pageNumber"
@@ -41,6 +48,7 @@ class App extends Component {
                 setCurrentTab={this.setCurrentTab}
                 setData={this.setData}
                 data={data[props.match.params.itemType]}
+                currentPage={currentPage[props.match.params.itemType]}
               />
             )}
           />

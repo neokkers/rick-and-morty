@@ -2,7 +2,9 @@ import React from 'react';
 import './itemCard.scss';
 
 const ItemCard = ({ item }) => (
-  <div className={`item-card ${item.status.toLowerCase()}`}>
+  <div
+    className={`item-card ${item.status ? item.status.toLowerCase() : null}`}
+  >
     <div
       className="img"
       style={{ backgroundImage: `url(${item.image})` }}
