@@ -5,6 +5,7 @@ import Tabs from '../Tabs/Tabs';
 import ItemsPage from '../ItemsPage/ItemsPage';
 import ItemPage from '../ItemPage/ItemPage';
 import './App.css';
+/* TODO: add proptypes */
 
 class App extends Component {
   state = {
