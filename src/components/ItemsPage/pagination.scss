@@ -1,4 +1,18 @@
 .pagination {
+  i {
+    font-size: 25px;
+    margin: 0 20px;
+    color: black;
+    line-height: 1;
+    cursor: pointer;
+    &[data-disabled="true"] {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .item {
     width: 30px;
     height: 30px;

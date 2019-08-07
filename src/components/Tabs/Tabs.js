@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './tabs.scss';
 
+/* TODO: refactor identical Links */
+
 const setClass = (type, currentTab) =>
   type === currentTab ? 'item selected' : 'item';
 
